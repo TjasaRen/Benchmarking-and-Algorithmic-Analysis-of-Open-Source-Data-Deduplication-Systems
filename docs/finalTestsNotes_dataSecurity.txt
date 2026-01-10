@@ -1,0 +1,80 @@
+LICENCES OF USED FILES:
+https://github.com/sahib/rmlint?tab=readme-ov-file
+https://github.com/pauldreik/rdfind?tab=License-1-ov-file
+https://rdfind.pauldreik.se/rdfind.1.html
+
+I tested big dataset of 124.9 GB, and approximately 1/5 of that was the other dataset. I used both rmlint and rdfind tools as I was unable to configure VDO in set time. Both used tools are/can be under GLPv3 (one author allows for 2nd version or higher).
+I used SanDisk Ultra® Dual Drive 128 GB USB Type-C with alleged 400 MB/s read speed (actual tested value ~370 MB/s), and since results of deduplication were out almost immediately, this means this drive was sufficient, otherwise I would need to switch to same NVMe as I used for bigger set to ensure same conditions. For bigger set I used WD_BLACK SN770 1TB, which was designed to preform at 4,900-5,150 MB/s read speed. Tests with hdparm showed ~2600 MB/s but actual performance of dedup was several times higher than that when peaking but average at first sight was not, or rather, it probably wouldn't, if it would run for longer.
+
+
+INITIAL NOTES:
+
+rmlint -g .
+
+
+rdfind .
+rdfind -makesymlinks true .
+
+-sleep Xms
+    Sleeps X milliseconds between reading each file, to reduce load. Default is 0 (no sleep). Note that only a few values are supported at present: 0,1-5,10,25,50,100 milliseconds. 
+    
+    -deleteduplicates true|false
+    Delete (unlink) files. Default is false.
+    
+    -checksum md5|sha1|sha256|sha512|xxh128
+    What type of checksum to be used: md5, sha1, sha256, sha512 or xxh128. The default is sha1 since version 1.4.0. xxh128 is a very fast checksum, but not of cryptographic quality. xxh support is optional and requires that rdfind was configured with --with-xxhash. In case xxh is used but there is no support, an error is returned.
+    
+    
+    OTHER INFO - man page >> https://rdfind.pauldreik.se/rdfind.1.html
+    
+    
+  TO BENCHMARK DISK PARTITION  -- hdparm (sudo apt install hdparm)
+  
+  - ls /dev to check if the partition was under this directory, and it was, so I wrote:
+  sudo hdparm -tv /dev/nvme0n1p6 to run the command that tested read speeds. I repeated the process 3 times (results in figure below).
+  
+  
+RESULTS: BIGGER DATASET WENT FROM 124.9 GB to 101.2 GB. 
+  
+  
+ HISTORY OF ALL THE RELEVANT COMMANDS FOR DEDUP:
+ 
+ 1062  sudo apt install rmlint
+ 1063  sudo apt install rdfind
+ 1064  ls
+ 1065  cd Downloads/
+ 1066  rfind .
+ 1067  sudo rfind .
+ 1068  rdfind .
+ 1069  ls
+ 1070  cat results.txt
+ 1071  cd ..
+ 1072  sudo apt install fslint
+ 1073  cd Downloads/
+ 1074  ls
+ 1075  cd testDedup/
+ 1076  ls
+ 1077  rdfind .
+ 1078  cat results.txt 
+ 1079  rmlint .
+ 1080  history
+ 1081  cd Downloads/q
+ 1082  cd dow
+ 1083  cd Downloads/
+ 1084  ls
+ 1085  cd testDedup/
+ 1086  rdfind .
+ 1087  rmling --help
+ 1088  rmlint --help
+ 1089  clear
+ 1090  rdfind .
+ 1091  rmlint -g .
+ 1092  rdfind -makesymlinks true .
+ 1093  sudo rdfind -makesymlinks true .
+ 
+ 
+ REFERENCES:
+ - https://github.com/sahib/rmlint
+- https://github.com/pauldreik/rdfind
+- https://rdfind.pauldreik.se/rdfind.1.html
+ - https://documents.westerndigital.com/content/dam/doc-library/en_us/assets/public/western-digital/product/internal-drives/wd-black-ssd/product-brief-wd-black-sn770-nvme-ssd.pdf
