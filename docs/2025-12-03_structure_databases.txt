@@ -1,4 +1,4 @@
-Datasets' structure:
+OLD [Datasets' structure:]
 
 DS 1 ~ 100 GB
 
@@ -8,3 +8,13 @@ DS 1 ~ 100 GB
 
 NOTE: mostly non-synthetic data, synthetic was created using Faker (python version), info available on: https://github.com/joke2k/faker
 
+
+NEW Dataset structure
+
+DS 1 = 124.9 GB
+
+  ~ 70 GB of media files
+  ~ 31 GB of .ova/.iso files
+  ~ rest is synthetic data
+
+NOTE: Synthetic data was created using Faker (python version), info available on: https://github.com/joke2k/faker
